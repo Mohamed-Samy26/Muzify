@@ -3,7 +3,7 @@ import './HomePage.dart';
 import 'CreatePlaylist.dart';
 import 'Hover.dart';
 import 'LikedSongs.dart';
-import './Search1.dart';
+import './Search.dart';
 import 'YourLibrary.dart';
 
 class NavigationDrawer extends StatefulWidget {
