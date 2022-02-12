@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import './NavigationDrawer.dart';
 
 void main() => runApp(MaterialApp(
@@ -14,11 +13,11 @@ class YourLibrary extends StatefulWidget {
 }
 
 class _YourLibraryState extends State<YourLibrary> {
-  Color veryLightPurble = new Color(0xff202744);
-  Color lightPurble = new Color(0xff1b1c3a);
-  Color darkPurble = new Color(0xff131126);
-  Color gray = new Color(0xff666583);
-  Color blue = new Color(0xff3bb5dc);
+  Color veryLightPurble =  Color(0xff202744);
+  Color lightPurble =  Color(0xff1b1c3a);
+  Color darkPurble =  Color(0xff131126);
+  Color gray = Color(0xff666583);
+  Color blue = Color(0xff3bb5dc);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class _YourLibraryState extends State<YourLibrary> {
                       },
                     ),
                   ),
-                  Image(
+                  const Image(
                     image: AssetImage('assets/muzify.png'),
                     width: 200,
                   ),
@@ -53,7 +52,7 @@ class _YourLibraryState extends State<YourLibrary> {
               ),
             );
           }),
-          Center(
+          const Center(
             child: Padding(
               padding: EdgeInsets.all(50),
               child: Text(

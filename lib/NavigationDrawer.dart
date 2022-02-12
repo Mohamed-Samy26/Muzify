@@ -14,11 +14,11 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  Color veryLightPurble = new Color(0xff202744);
-  Color lightPurble = new Color(0xff1b1c3a);
-  Color darkPurble = new Color(0xff131126);
-  Color gray = new Color(0xff666583);
-  Color blue = new Color(0xff3bb5dc);
+  Color veryLightPurble = const Color(0xff202744);
+  Color lightPurble = const Color(0xff1b1c3a);
+  Color darkPurble = const  Color(0xff131126);
+  Color gray = const Color(0xff666583);
+  Color blue = const Color(0xff3bb5dc);
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +173,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               }),
 
 // -----------------------------------------------------------------------------
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Hover(builder: (isHovered) {
@@ -186,7 +186,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       size: 30,
                       color: color,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -201,14 +201,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                CreatePlaylist()));
+                                const CreatePlaylist()));
                       },
                     ),
                   ],
                 );
               }),
 // -----------------------------------------------------------------------------
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Hover(builder: (isHovered) {
@@ -221,7 +221,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       size: 30,
                       color: color,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -235,7 +235,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       ),
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (BuildContext context) => LikedSongs()));
+                            builder: (BuildContext context) => const LikedSongs()));
                       },
                     ),
                   ],
