@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:m1/Downloader.dart';
+import 'package:youtube_api/youtube_api.dart';
 
 import './NavigationDrawer.dart';
 
@@ -76,8 +78,12 @@ class _SearchState extends State<Search> {
                       hintText: ('Search...'),
                       hintStyle: TextStyle(color: Colors.white24),
                     ),
-                    onChanged: (String txt) {
-                      print(txt);
+                    // onChanged: (String txt) {
+                    //   print(txt);
+                    // },
+                    onSubmitted: (String txt)async{
+                      List<YouTubeVideo> video =await Downloader.callAPI(txt);
+                      print(video.first.url);
                     },
                   );
                 } else {
