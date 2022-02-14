@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:path/path.dart' as p;
+import 'dart:io';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_file_manager/flutter_file_manager.dart';
 import './CreatePlaylist.dart';
 import './Hover.dart';
 import './LikedSongs.dart';
-import './OLD-Search.dart';
 import './YourLibrary.dart';
 import './NavigationDrawer.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-
 
 void main() => runApp(MaterialApp(
       home: HomePage(),
@@ -29,17 +32,18 @@ class _HomePageState extends State<HomePage> {
   Duration progress = Duration();
   late DurationState _durationState;
   Color veryLightPurble = Color(0xff202744);
-  Color lightPurble =  Color(0xff1b1c3a);
-  Color darkPurble =  Color(0xff131126);
+  Color lightPurble = Color(0xff1b1c3a);
+  Color darkPurble = Color(0xff131126);
   Color gray = Color(0xff666583);
   Color blue = Color(0xff3bb5dc);
+  final FlutterAudioQuery audioQuery = FlutterAudioQuery();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: darkPurble,
       endDrawer: NavigationDrawer(),
-      body:Column(
+      body: Column(
         children: <Widget>[
           Builder(builder: (context) {
             return Padding(
@@ -85,17 +89,35 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 400,
+              SizedBox(
+                width: 200,
+                child: TextButton(
+                  onPressed: () async {
+                    List<SongInfo> songs = await audioQuery.getSongs();
+                    songs.forEach((element) {
+                      print({'${element} \n'});
+                    });
+                  },
+                  child: Text(
+                    'Find downloaded songs',
+                    style: TextStyle(color: Colors.white),
                   ),
-                  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    FloatingActionButton(
-                        backgroundColor: Colors.blue,
-                        child: const Icon(Icons.play_arrow_outlined),
-                        onPressed: () {
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.deepPurple)),
+                ),
+              ),
+              const SizedBox(
+                height: 300,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  FloatingActionButton(
+                      backgroundColor: Colors.blue,
+                      child: const Icon(Icons.play_arrow_outlined),
+                      onPressed: () {
                           audioPlayer.play(
                               "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3");
                           audioPlayer.onDurationChanged.listen((Duration d) {
