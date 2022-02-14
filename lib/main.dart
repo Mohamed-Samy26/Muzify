@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:path/path.dart' as p;
-import 'dart:io';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_file_manager/flutter_file_manager.dart';
 import './CreatePlaylist.dart';
 import './Hover.dart';
 import './LikedSongs.dart';
@@ -67,7 +64,6 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-
                 ],
               ),
             );
