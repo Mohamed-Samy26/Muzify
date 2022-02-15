@@ -78,13 +78,15 @@ class _SearchState extends State<Search> {
                       hintText: ('Search...'),
                       hintStyle: TextStyle(color: Colors.white24),
                     ),
-                    // onChanged: (String txt) {
-                    //   print(txt);
-                    // },
                     onSubmitted: (String txt)async{
                       List<YouTubeVideo> video =await Downloader.callAPI(txt);
                       print(video.first.url);
-                    },
+                      try {
+                        Downloader.download(video.first.url);
+                      }catch(error){
+                        print('Something went wrong');
+                      }
+                      },
                   );
                 } else {
                   actionIcon = const Icon(
