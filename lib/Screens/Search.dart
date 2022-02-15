@@ -18,11 +18,21 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
 
-  Widget appbart = Text(
+  Widget appbart = const Text(
     'Search your song',
+    style: TextStyle(
+      color: Colors.pinkAccent,
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+    ),
   );
+
   Widget appbart2 = Text('Results');
-  Icon actionIcon = Icon(Icons.search);
+  Icon actionIcon = Icon(
+    Icons.search,
+    size: 30,
+    color: Colors.white,
+  );
   var post;
 
   @override
@@ -46,26 +56,30 @@ class _SearchState extends State<Search> {
             onPressed: () {
               setState(() {
                 if (actionIcon.icon == Icons.search) {
-                  actionIcon = const Icon(Icons.close);
+                  actionIcon =
+                      const Icon(Icons.close, size: 30, color: Colors.white);
                   appbart = TextField(
+                    autofocus: true,
+                    cursorColor: Colors.white,
                     style: const TextStyle(
                       color: Colors.white,
                     ),
                     decoration: const InputDecoration(
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.search, color: Colors.white),
+                      prefixIcon:
+                          Icon(Icons.search, size: 30, color: Colors.white),
                       hintText: ('Search...'),
-                      hintStyle: TextStyle(color: Colors.white24),
+                      hintStyle: TextStyle(color: Colors.white60),
                     ),
-                    onSubmitted: (String txt)async{
-                      List<YouTubeVideo> video =await Downloader.callAPI(txt);
+                    onSubmitted: (String txt) async {
+                      List<YouTubeVideo> video = await Downloader.callAPI(txt);
                       print(video.first.url);
                       try {
                         Downloader.download(video.first.url);
-                      }catch(error){
+                      } catch (error) {
                         print('Something went wrong');
                       }
-                      },
+                    },
                   );
                 } else {
                   actionIcon = const Icon(

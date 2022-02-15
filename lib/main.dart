@@ -11,6 +11,9 @@ void main() {
 class Muzify extends StatelessWidget {
   const Muzify({Key? key}) : super(key: key);
 
+//flutter run --no-sound-null-safety
+
+ // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,6 +24,8 @@ class Muzify extends StatelessWidget {
         scaffoldBackgroundColor: KdarkPurble,
       ),
       home: HomePage(),
+
     );
   }
 }
+

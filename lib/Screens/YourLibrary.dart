@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Classes/NavigationDrawer.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
@@ -5,8 +6,8 @@ import 'package:flutter_audio_query/flutter_audio_query.dart';
 import '../Classes/Constants.dart';
 
 void main() => runApp(MaterialApp(
-      home: YourLibrary(),
-    ));
+  home: YourLibrary(),
+));
 
 class YourLibrary extends StatefulWidget {
   const YourLibrary({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _YourLibraryState extends State<YourLibrary> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: NavigationDrawer(),
       appBar: AppBar(
@@ -63,24 +65,35 @@ class _YourLibraryState extends State<YourLibrary> {
                     songs.forEach((element) {
                       print({'${element} \n'});
                     });
-                    songsList.addAll(songs.map((e) => Card(
+                    songsList.addAll(songs.map((element) => Card(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               ListTile(
-                                leading: Icon(Icons.album),
-                                title: Text('${e.title}'),
+                                tileColor: Colors.white70,
+                                leading: const Icon(
+                                  Icons.album,
+                                  size: 50,
+                                ),
+                                title: Text(
+                                  element.title,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
                                 subtitle: Text(
-                                    'Artist: ${e.artist}, ${e.displayName}'),
+                                    'Artist: ${element.artist}, ${element.displayName}'),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
-                                  TextButton(
-                                    child: const Text('Add to favourites'),
-                                    onPressed: () {
-                                      /* ... */
-                                    },
+                                  IconButton(
+                                    icon: Icon(Icons.thumb_up),
+                                    onPressed: () {},
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.play_arrow),
+                                    onPressed: () {},
                                   ),
                                   const SizedBox(width: 8),
                                 ],
@@ -95,8 +108,8 @@ class _YourLibraryState extends State<YourLibrary> {
                     setState(() {
                       if (done) {
                         placeHold = SizedBox(
-                          height: 200,
-                          width: 200,
+                          height: size.height * 0.6,
+                          width: size.width * 0.95,
                           child: ListView(
                             shrinkWrap: done,
                             children: songsList,
@@ -105,13 +118,13 @@ class _YourLibraryState extends State<YourLibrary> {
                       }
                     });
                   },
-                  child: Text(
+                  child: const Text(
                     'Refresh downloaded songs',
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.deepPurple)),
+                      MaterialStateProperty.all(Colors.deepPurple)),
                 ),
               ),
               placeHold
@@ -122,7 +135,7 @@ class _YourLibraryState extends State<YourLibrary> {
           ),
         ],
       ),
-      
+
     );
   }
 }
