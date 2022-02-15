@@ -24,7 +24,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         //navigation bar
         width: 240,
         decoration: const BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [KlightPurble, KdarkPurble]),
