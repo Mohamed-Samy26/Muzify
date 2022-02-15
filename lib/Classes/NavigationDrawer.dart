@@ -23,48 +23,48 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       child: Container(
         //navigation bar
         width: 240,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
+        decoration: const BoxDecoration(
+          gradient: const LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [KlightPurble, KdarkPurble]),
         ),
         child: Padding(
           //padding for navigation bar
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: Column(
             //all elements in navigation bar
             crossAxisAlignment: CrossAxisAlignment.center,
             //make column in center in x-axis
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(blurRadius: 10, color: Kblue, spreadRadius: 1)
                     ]),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   //backgroundImage: Image.asset("assets/muzify.png"),
                   radius: 50,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Text(
+              const Text(
                 'User name',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   // shadows:
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Hover(builder: (isHovered) {
@@ -77,7 +77,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       size: 30,
                       color: color,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -90,14 +90,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const HomePage()));
                       },
                     ),
                   ],
                 );
               }),
 // -----------------------------------------------------------------------------
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Hover(
@@ -111,7 +113,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         size: 30,
                         color: color,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       GestureDetector(
@@ -126,7 +128,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => Search()));
+                                  builder: (BuildContext context) =>
+                                      const Search()));
                         },
                       ),
                     ],
@@ -135,7 +138,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
 
 // -----------------------------------------------------------------------------
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Hover(builder: (isHovered) {
@@ -148,7 +151,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       size: 30,
                       color: color,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -162,7 +165,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       ),
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (BuildContext context) => YourLibrary()));
+                            builder: (BuildContext context) =>
+                                const YourLibrary()));
                       },
                     ),
                   ],

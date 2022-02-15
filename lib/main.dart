@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:m1/Classes/Constants.dart';
+import 'package:m1/Classes/MusicProvider.dart';
 import 'package:m1/Screens/welcome.dart';
 import 'package:m1/main.dart';
+import 'package:provider/provider.dart';
 
 import 'Screens/HomePage.dart';
 
@@ -17,17 +19,18 @@ class Muzify extends StatelessWidget {
  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Muzify",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(backgroundColor: KdarkPurble),
-        scaffoldBackgroundColor: KdarkPurble,
-      ),
-      // home: HomePage(),
-      home: welcome(),
-
-    );
+    return ChangeNotifierProvider(
+        create: (context) {
+          return MusicProvider();
+        },
+        child: MaterialApp(
+          title: "Muzify",
+          debugShowCheckedModeBanner: false,
+          home: welcome(),
+          theme: ThemeData(
+            appBarTheme: AppBarTheme(backgroundColor: KdarkPurble),
+            scaffoldBackgroundColor: KdarkPurble,
+          ),
+        ));
   }
 }
-

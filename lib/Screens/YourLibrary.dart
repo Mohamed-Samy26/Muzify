@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:m1/Home.dart';
-import './NavigationDrawer.dart';
+import '../Classes/NavigationDrawer.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
-import './MusicProvider.dart';
 import 'package:provider/provider.dart';
+import '../Classes/MusicProvider.dart';
+import '../Classes/Constants.dart';
+import 'HomePage.dart';
 
 void main() => runApp(const MaterialApp(
-      home: YourLibrary(),
+      home: const YourLibrary(),
     ));
 
 class YourLibrary extends StatefulWidget {
@@ -18,11 +19,6 @@ class YourLibrary extends StatefulWidget {
 }
 
 class _YourLibraryState extends State<YourLibrary> {
-  Color veryLightPurble = const Color(0xff202744);
-  Color lightPurble = const Color(0xff1b1c3a);
-  Color darkPurble = const Color(0xff131126);
-  Color gray = const Color(0xff666583);
-  Color blue = const Color(0xff3bb5dc);
   late List<SongInfo> songs;
   List<Widget> songsList = [const Card()];
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
@@ -36,34 +32,18 @@ class _YourLibraryState extends State<YourLibrary> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: darkPurble,
-      endDrawer: const NavigationDrawer(),
+      drawer: const NavigationDrawer(),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: 70,
+        title: const Image(
+          image: AssetImage('assets/muzify.png'),
+          width: 150,
+        ),
+      ),
       body: Column(
         children: <Widget>[
-          Builder(builder: (context) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.menu,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    onTap: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-                  const Image(
-                    image: AssetImage('assets/muzify.png'),
-                    width: 200,
-                  ),
-                ],
-              ),
-            );
-          }),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -83,9 +63,9 @@ class _YourLibraryState extends State<YourLibrary> {
                 child: TextButton(
                   onPressed: () async {
                     songs = await audioQuery.getSongs();
-                    for (var element in songs) {
-                      print({'$element \n'});
-                    }
+                    songs.forEach((element) {
+                      print({'${element} \n'});
+                    });
                     songsList.addAll(songs.map((element) => Card(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -117,12 +97,12 @@ class _YourLibraryState extends State<YourLibrary> {
                                     onPressed: () {
                                       Provider.of<MusicProvider>(context,
                                               listen: false)
-                                          .setLocalPath(element.filePath);
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (_) => const HomePage(),
-                                        ),
-                                      );
+                                          .setPath(element.filePath);
+                                      print(element.filePath);
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const HomePage()));
                                     },
                                   ),
                                   const SizedBox(width: 8),
@@ -151,7 +131,7 @@ class _YourLibraryState extends State<YourLibrary> {
                   ),
                   style: ButtonStyle(
                       backgroundColor:
-                      MaterialStateProperty.all(Colors.deepPurple)),
+                          MaterialStateProperty.all(Colors.deepPurple)),
                 ),
               ),
               placeHold
@@ -159,7 +139,6 @@ class _YourLibraryState extends State<YourLibrary> {
           ),
         ],
       ),
-
     );
   }
 }

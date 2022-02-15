@@ -1,10 +1,10 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-
 import '../Classes/DurationState.dart';
 import '../Classes/NavigationDrawer.dart';
-import '../main.dart';
+import 'package:provider/provider.dart';
+import '../Classes/MusicProvider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   AudioPlayer audioPlayer = AudioPlayer();
   Duration total = Duration();
   Duration progress = Duration();
@@ -49,18 +48,21 @@ class _HomePageState extends State<HomePage> {
                   child: const Icon(Icons.play_arrow_outlined),
                   onPressed: () {
                     audioPlayer.play(
-                        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3");
-                    audioPlayer.onDurationChanged.listen((Duration d) {
-                      print('Max duration: $d');
-                      setState(() => total = d);
-                    });
-                    audioPlayer.onAudioPositionChanged.listen((Duration  p) {
-                      print('Current position: $p');
-                      setState(() => progress = p);
-                    });
-                    DurationState _durationState = DurationState(total: total , progress : progress , buffered : progress);
-                    setState(() {});
-                  }),
+                          Provider.of<MusicProvider>(context, listen: false)
+                              .path,
+                          isLocal: Provider.of<MusicProvider>(context).isLocal);
+                      audioPlayer.onDurationChanged.listen((Duration d) {
+                        print('Max duration: $d');
+                        setState(() => total = d);
+                      });
+                      audioPlayer.onAudioPositionChanged.listen((Duration p) {
+                        print('Current position: $p');
+                        setState(() => progress = p);
+                      });
+                      DurationState _durationState = DurationState(
+                          total: total, progress: progress, buffered: progress);
+                      setState(() {});
+                    }),
               FloatingActionButton(
                   backgroundColor: Colors.red,
                   child: const Icon(Icons.stop),
