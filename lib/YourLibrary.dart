@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './NavigationDrawer.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 
 void main() => runApp(MaterialApp(
-      home: YourLibrary(),
-    ));
+  home: YourLibrary(),
+));
 
 class YourLibrary extends StatefulWidget {
   const YourLibrary({Key? key}) : super(key: key);
@@ -84,30 +85,32 @@ class _YourLibraryState extends State<YourLibrary> {
                       print({'${element} \n'});
                     });
                     songsList.addAll(songs.map((e) => Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(Icons.album),
+                            title: Text('${e.title}'),
+                            subtitle: Text(
+                                'Artist: ${e.artist}, ${e.displayName}'),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              ListTile(
-                                leading: Icon(Icons.album),
-                                title: Text('${e.title}'),
-                                subtitle: Text(
-                                    'Artist: ${e.artist}, ${e.displayName}'),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  TextButton(
-                                    child: const Text('Add to favourites'),
-                                    onPressed: () {
-                                      /* ... */
-                                    },
+                                  IconButton(
+                                    icon: Icon(Icons.thumb_up),
+                                    onPressed: () {},
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.play_arrow),
+                                    onPressed: () {},
                                   ),
                                   const SizedBox(width: 8),
                                 ],
-                              ),
-                            ],
                           ),
-                        )));
+                        ],
+                      ),
+                    )));
                     // placeHold =  ListView(
                     //   children: songsList ,
                     // );
@@ -115,8 +118,8 @@ class _YourLibraryState extends State<YourLibrary> {
                     setState(() {
                       if (done) {
                         placeHold = SizedBox(
-                          height: 200,
-                          width: 200,
+                          height: 450,
+                          width: 400,
                           child: ListView(
                             shrinkWrap: done,
                             children: songsList,
@@ -125,13 +128,13 @@ class _YourLibraryState extends State<YourLibrary> {
                       }
                     });
                   },
-                  child: Text(
+                  child: const Text(
                     'Refresh downloaded songs',
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.deepPurple)),
+                      MaterialStateProperty.all(Colors.deepPurple)),
                 ),
               ),
               placeHold
@@ -142,7 +145,7 @@ class _YourLibraryState extends State<YourLibrary> {
           ),
         ],
       ),
-      
+
     );
   }
 }
