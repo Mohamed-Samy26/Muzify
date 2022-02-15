@@ -17,6 +17,6 @@ class Downloader {
     return videoResult;
    }
   static void download(String url)async{
-     await http.post(Uri.parse(localAPIAddress + url));
+     await http.get(Uri.parse(localAPIAddress + url));
   }
 }
