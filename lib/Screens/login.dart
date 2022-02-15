@@ -18,43 +18,51 @@ class loginScreen extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
                 SizedBox(
                   width: size.width * 0.7,
                   height: size.height * 0.42,
                   child: Image.asset('assets/muzify.png'),
                 ),
-                const TextField(
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    prefixIcon:
-                        Icon(Icons.person, size: 30, color: Colors.deepPurple),
-                    hintText: ('User name'),
-                    hintStyle: TextStyle(color: Colors.grey),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  child: const TextField(
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      prefixIcon:
+                          Icon(Icons.person, size: 30, color: Colors.deepPurple),
+                      hintText: ('User name'),
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(Icons.lock_open,
+                          size: 30, color: Colors.deepPurple),
+                      hintText: ('Password'),
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                    obscureText: true,
                   ),
                 ),
                 SizedBox(
                   height: size.height * 0.08,
                 ),
-                const TextField(
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    prefixIcon: Icon(Icons.lock_open,
-                        size: 30, color: Colors.deepPurple),
-                    hintText: ('Password'),
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                  obscureText: true,
-                ),
-                SizedBox(
-                  height: size.height * 0.06,
-                ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(29),
                   child: FlatButton(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                     color: kPrimaryColor,
                     onPressed: () {
                       Navigator.push(
@@ -70,7 +78,7 @@ class loginScreen extends StatelessWidget {
                       "LOG IN",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 15,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                   ),

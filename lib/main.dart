@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m1/Classes/Constants.dart';
+import 'package:m1/Screens/welcome.dart';
 import 'package:m1/main.dart';
 
 import 'Screens/HomePage.dart';
@@ -23,7 +24,8 @@ class Muzify extends StatelessWidget {
         appBarTheme: AppBarTheme(backgroundColor: KdarkPurble),
         scaffoldBackgroundColor: KdarkPurble,
       ),
-      home: HomePage(),
+      // home: HomePage(),
+      home: welcome(),
 
     );
   }
