@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:m1/Downloader.dart';
+import 'package:m1/Classes/Downloader.dart';
 import 'package:youtube_api/youtube_api.dart';
 
-import './NavigationDrawer.dart';
+import '../Classes/Constants.dart';
+import '../Classes/NavigationDrawer.dart';
 
 void main() => runApp(MaterialApp(
       home: Search(),
@@ -16,11 +17,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  Color veryLightPurble = new Color(0xff202744);
-  Color lightPurble = new Color(0xff1b1c3a);
-  Color darkPurble = new Color(0xff131126);
-  Color gray = new Color(0xff666583);
-  Color blue = new Color(0xff3bb5dc);
+
   Widget appbart = Text(
     'Search your song',
   );
@@ -31,36 +28,18 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkPurble,
-      endDrawer: NavigationDrawer(),
+      drawer: NavigationDrawer(),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: 70,
+        title: Image(
+          image: AssetImage('assets/muzify.png'),
+          width: 150,
+        ),
+      ),
       body: Column(
         children: <Widget>[
-          Builder(builder: (context) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Image(
-                    image: AssetImage('assets/muzify.png'),
-                    width: 200,
-                  ),
-                  Container(
-                    child: GestureDetector(
-                      child: Icon(
-                        Icons.menu,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      onTap: () {
-                        Scaffold.of(context).openEndDrawer();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
           appbart,
           IconButton(
             icon: actionIcon,

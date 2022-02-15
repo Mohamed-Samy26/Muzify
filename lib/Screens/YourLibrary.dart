@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import './NavigationDrawer.dart';
+import '../Classes/NavigationDrawer.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
+
+import '../Classes/Constants.dart';
 
 void main() => runApp(MaterialApp(
       home: YourLibrary(),
@@ -14,11 +16,7 @@ class YourLibrary extends StatefulWidget {
 }
 
 class _YourLibraryState extends State<YourLibrary> {
-  Color veryLightPurble = Color(0xff202744);
-  Color lightPurble = Color(0xff1b1c3a);
-  Color darkPurble = Color(0xff131126);
-  Color gray = Color(0xff666583);
-  Color blue = Color(0xff3bb5dc);
+
   late List<SongInfo> songs;
   List<Widget> songsList = [Card()];
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
@@ -31,36 +29,18 @@ class _YourLibraryState extends State<YourLibrary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkPurble,
-      endDrawer: NavigationDrawer(),
+      drawer: NavigationDrawer(),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: 70,
+        title: Image(
+          image: AssetImage('assets/muzify.png'),
+          width: 150,
+        ),
+      ),
       body: Column(
         children: <Widget>[
-          Builder(builder: (context) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    child: GestureDetector(
-                      child: Icon(
-                        Icons.menu,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      onTap: () {
-                        Scaffold.of(context).openEndDrawer();
-                      },
-                    ),
-                  ),
-                  const Image(
-                    image: AssetImage('assets/muzify.png'),
-                    width: 200,
-                  ),
-                ],
-              ),
-            );
-          }),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

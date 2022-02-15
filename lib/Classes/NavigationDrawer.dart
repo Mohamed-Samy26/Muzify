@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import './main.dart';
-import 'CreatePlaylist.dart';
+import '../main.dart';
+import 'Constants.dart';
+import '../Screens/CreatePlaylist.dart';
 import 'Hover.dart';
-import 'LikedSongs.dart';
-import './Search.dart';
-import 'YourLibrary.dart';
+import '../Screens/LikedSongs.dart';
+import '../Screens/Search.dart';
+import '../Screens/HomePage.dart';
+import '../Screens/YourLibrary.dart';
 
 class NavigationDrawer extends StatefulWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -14,11 +16,6 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  Color veryLightPurble = const Color(0xff202744);
-  Color lightPurble = const Color(0xff1b1c3a);
-  Color darkPurble = const  Color(0xff131126);
-  Color gray = const Color(0xff666583);
-  Color blue = const Color(0xff3bb5dc);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [lightPurble, darkPurble]),
+              colors: [KlightPurble, KdarkPurble]),
         ),
         child: Padding(
           //padding for navigation bar
@@ -48,7 +45,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     color: Colors.white,
                     shape: BoxShape.circle,
                     boxShadow: [
-                      BoxShadow(blurRadius: 10, color: blue, spreadRadius: 1)
+                      BoxShadow(blurRadius: 10, color: Kblue, spreadRadius: 1)
                     ]),
                 child: CircleAvatar(
                   //backgroundImage: Image.asset("assets/muzify.png"),
@@ -71,7 +68,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 30,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -105,7 +102,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
               Hover(
                 builder: (isHovered) {
-                  final color = isHovered ? blue : gray;
+                  final color = isHovered ? Kblue : Kgray;
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -142,7 +139,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 10,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -177,7 +174,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 40,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -212,7 +209,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 10,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
