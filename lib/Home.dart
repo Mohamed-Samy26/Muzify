@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import './MusicProvider.dart';
 import './CreatePlaylist.dart';
-import './Hover.dart';
 import './LikedSongs.dart';
 import './YourLibrary.dart';
 import './NavigationDrawer.dart';
@@ -93,7 +94,9 @@ class _HomePageState extends State<HomePage> {
                       child: const Icon(Icons.play_arrow_outlined),
                       onPressed: () {
                         audioPlayer.play(
-                            "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3");
+                            Provider.of<MusicProvider>(context).path,
+                            isLocal:
+                                Provider.of<MusicProvider>(context).isLocal);
                         audioPlayer.onDurationChanged.listen((Duration d) {
                           print('Max duration: $d');
                           setState(() => total = d);

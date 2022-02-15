@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:m1/Home.dart';
 import './NavigationDrawer.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
+import './MusicProvider.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MaterialApp(
-  home: YourLibrary(),
-));
+void main() => runApp(const MaterialApp(
+      home: YourLibrary(),
+    ));
 
 class YourLibrary extends StatefulWidget {
   const YourLibrary({Key? key}) : super(key: key);
@@ -15,15 +18,15 @@ class YourLibrary extends StatefulWidget {
 }
 
 class _YourLibraryState extends State<YourLibrary> {
-  Color veryLightPurble = Color(0xff202744);
-  Color lightPurble = Color(0xff1b1c3a);
-  Color darkPurble = Color(0xff131126);
-  Color gray = Color(0xff666583);
-  Color blue = Color(0xff3bb5dc);
+  Color veryLightPurble = const Color(0xff202744);
+  Color lightPurble = const Color(0xff1b1c3a);
+  Color darkPurble = const Color(0xff131126);
+  Color gray = const Color(0xff666583);
+  Color blue = const Color(0xff3bb5dc);
   late List<SongInfo> songs;
-  List<Widget> songsList = [Card()];
+  List<Widget> songsList = [const Card()];
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
-  Widget placeHold = Text(
+  Widget placeHold = const Text(
     "No songs yet",
     style: TextStyle(color: Colors.white),
   );
@@ -34,26 +37,24 @@ class _YourLibraryState extends State<YourLibrary> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: darkPurble,
-      endDrawer: NavigationDrawer(),
+      endDrawer: const NavigationDrawer(),
       body: Column(
         children: <Widget>[
           Builder(builder: (context) {
             return Padding(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    child: GestureDetector(
-                      child: Icon(
-                        Icons.menu,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      onTap: () {
-                        Scaffold.of(context).openEndDrawer();
-                      },
+                  GestureDetector(
+                    child: const Icon(
+                      Icons.menu,
+                      size: 50,
+                      color: Colors.white,
                     ),
+                    onTap: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
                   ),
                   const Image(
                     image: AssetImage('assets/muzify.png'),
@@ -66,7 +67,7 @@ class _YourLibraryState extends State<YourLibrary> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(50),
                 child: Text(
                   'Your Library',
@@ -82,9 +83,9 @@ class _YourLibraryState extends State<YourLibrary> {
                 child: TextButton(
                   onPressed: () async {
                     songs = await audioQuery.getSongs();
-                    songs.forEach((element) {
-                      print({'${element} \n'});
-                    });
+                    for (var element in songs) {
+                      print({'$element \n'});
+                    }
                     songsList.addAll(songs.map((element) => Card(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -97,7 +98,7 @@ class _YourLibraryState extends State<YourLibrary> {
                                 ),
                                 title: Text(
                                   element.title,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20),
                                 ),
@@ -108,12 +109,21 @@ class _YourLibraryState extends State<YourLibrary> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
                                   IconButton(
-                                    icon: Icon(Icons.thumb_up),
+                                    icon: const Icon(Icons.thumb_up),
                                     onPressed: () {},
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.play_arrow),
-                                    onPressed: () {},
+                                    icon: const Icon(Icons.play_arrow),
+                                    onPressed: () {
+                                      Provider.of<MusicProvider>(context,
+                                              listen: false)
+                                          .setLocalPath(element.filePath);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (_) => const HomePage(),
+                                        ),
+                                      );
+                                    },
                                   ),
                                   const SizedBox(width: 8),
                                 ],
@@ -121,9 +131,6 @@ class _YourLibraryState extends State<YourLibrary> {
                             ],
                           ),
                         )));
-                    // placeHold =  ListView(
-                    //   children: songsList ,
-                    // );
                     done = true;
                     setState(() {
                       if (done) {
@@ -148,9 +155,6 @@ class _YourLibraryState extends State<YourLibrary> {
                 ),
               ),
               placeHold
-              // ListView(
-              //   children: songsList ,
-              // )
             ],
           ),
         ],
