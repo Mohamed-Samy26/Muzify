@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './CreatePlaylist.dart';
@@ -33,7 +32,6 @@ class _HomePageState extends State<HomePage> {
   Color darkPurble = Color(0xff131126);
   Color gray = Color(0xff666583);
   Color blue = Color(0xff3bb5dc);
-  final FlutterAudioQuery audioQuery = FlutterAudioQuery();
 
   @override
   Widget build(BuildContext context) {
@@ -85,24 +83,6 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              SizedBox(
-                width: 200,
-                child: TextButton(
-                  onPressed: () async {
-                    List<SongInfo> songs = await audioQuery.getSongs();
-                    songs.forEach((element) {
-                      print({'${element} \n'});
-                    });
-                  },
-                  child: Text(
-                    'Find downloaded songs',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.deepPurple)),
-                ),
-              ),
               const SizedBox(
                 height: 300,
               ),
