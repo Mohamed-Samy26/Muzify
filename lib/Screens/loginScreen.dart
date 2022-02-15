@@ -1,9 +1,9 @@
-import './login.dart';
+import 'login.dart';
 
-import 'backgroungpogin.dart';
+import '../Classes/backgroungpogin.dart';
 import 'package:flutter/material.dart';
 
-import 'loginbody.dart';
+import '../Classes/loginbody.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

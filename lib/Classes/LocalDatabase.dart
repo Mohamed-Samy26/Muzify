@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import './model.dart';
-import 'model.dart';
+import '../Models/model.dart';
+import '../Models/model.dart';
 
 /// table name UserInfo
 /// database path userInfo.db
