@@ -31,6 +31,7 @@ class _YourLibraryState extends State<YourLibrary> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: darkPurble,
       endDrawer: NavigationDrawer(),
@@ -84,19 +85,28 @@ class _YourLibraryState extends State<YourLibrary> {
                     songs.forEach((element) {
                       print({'${element} \n'});
                     });
-                    songsList.addAll(songs.map((e) => Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(Icons.album),
-                            title: Text('${e.title}'),
-                            subtitle: Text(
-                                'Artist: ${e.artist}, ${e.displayName}'),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                    songsList.addAll(songs.map((element) => Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
+                              ListTile(
+                                tileColor: Colors.white70,
+                                leading: const Icon(
+                                  Icons.album,
+                                  size: 50,
+                                ),
+                                title: Text(
+                                  element.title,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                                subtitle: Text(
+                                    'Artist: ${element.artist}, ${element.displayName}'),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
                                   IconButton(
                                     icon: Icon(Icons.thumb_up),
                                     onPressed: () {},
@@ -107,10 +117,10 @@ class _YourLibraryState extends State<YourLibrary> {
                                   ),
                                   const SizedBox(width: 8),
                                 ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )));
+                        )));
                     // placeHold =  ListView(
                     //   children: songsList ,
                     // );
@@ -118,8 +128,8 @@ class _YourLibraryState extends State<YourLibrary> {
                     setState(() {
                       if (done) {
                         placeHold = SizedBox(
-                          height: 450,
-                          width: 400,
+                          height: size.height * 0.6,
+                          width: size.width * 0.95,
                           child: ListView(
                             shrinkWrap: done,
                             children: songsList,
