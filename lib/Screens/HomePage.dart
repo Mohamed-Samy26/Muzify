@@ -50,7 +50,9 @@ class _HomePageState extends State<HomePage> {
                     audioPlayer.play(
                           Provider.of<MusicProvider>(context, listen: false)
                               .path,
-                          isLocal: Provider.of<MusicProvider>(context).isLocal);
+                          isLocal:
+                              Provider.of<MusicProvider>(context, listen: false)
+                                  .isLocal);
                       audioPlayer.onDurationChanged.listen((Duration d) {
                         print('Max duration: $d');
                         setState(() => total = d);
