@@ -114,8 +114,13 @@ class _YourLibraryState extends State<YourLibrary> {
                     done = true;
                     setState(() {
                       if (done) {
-                        placeHold = ListView(
-                          children: songsList,
+                        placeHold = SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: ListView(
+                            shrinkWrap: done,
+                            children: songsList,
+                          ),
                         );
                       }
                     });
