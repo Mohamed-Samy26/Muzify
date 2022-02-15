@@ -1,10 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:m1/LocalDatabase.dart';
 import './Home.dart';
 import './colors.dart';
 
-class loginScreen extends StatelessWidget {
-  const loginScreen({Key? key}) : super(key: key);
+class loginScreen extends StatefulWidget {
+  loginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<loginScreen> createState() => _loginScreenState();
+}
+
+class _loginScreenState extends State<loginScreen> {
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +43,22 @@ class loginScreen extends StatelessWidget {
                   height: size.height * 0.42,
                   child: Image.asset('assets/muzify.png'),
                 ),
-                const TextField(
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    prefixIcon:
-                        Icon(Icons.person, size: 30, color: Colors.deepPurple),
-                    hintText: ('User name'),
-                    hintStyle: TextStyle(color: Colors.grey),
+                 TextField(
+                 controller: emailController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  prefixIcon:
+                    Icon(Icons.person, size: 30, color: Colors.deepPurple),
+                  hintText: ('User name'),
+                  hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 SizedBox(
                   height: size.height * 0.08,
                 ),
-                const TextField(
+                 TextField(
+                 controller: passwordController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     prefixIcon: Icon(Icons.lock_open,
@@ -56,15 +77,22 @@ class loginScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     color: kPrimaryColor,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return HomePage();
-                          },
+                      String enteredPassword = LocalDatabase.getPassword(emailController.text) as String;
+                      if(passwordController.text == enteredPassword){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomePage();
+                            }
                         ),
                       );
-                    },
+                    }else{
+                        CupertinoAlertDialog(
+                          title: Text('Invalid credentials'),
+                        );
+                      }
+                  },//on pressed
                     child: Text(
                       "LOG IN",
                       style: TextStyle(

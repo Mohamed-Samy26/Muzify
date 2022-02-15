@@ -31,6 +31,24 @@ class LocalDatabase {
     });
   }
 
+  static Future<String> getPassword(String email) async {
+    String requestedPassword='';
+      requestedPassword = database.query(
+          'SELCET password FROM UserInfo WHERE email = $email') as String;
+
+      return requestedPassword;
+
+  }
+  static Future<String> getEmail(String email) async {
+    String requestedEmail='';
+    requestedEmail = database.query(
+        'SELCET email FROM UserInfo WHERE email = $email') as String;
+
+    return requestedEmail;
+
+  }
+
+
   static void getUserData(Database database) {
     database.rawQuery('SELECT * FROM UserInfo').then((value) {
       value.forEach((element) {

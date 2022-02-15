@@ -54,7 +54,16 @@ class Body extends StatelessWidget {
               child: FlatButton(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 color: kPrimaryLightColor,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return loginScreen();
+                      },
+                    ),
+                  );
+                },
                 child: Text(
                   "REGISTER ",
                   style: TextStyle(
