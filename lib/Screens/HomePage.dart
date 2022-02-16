@@ -43,11 +43,18 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              FloatingActionButton(
-                  backgroundColor: Colors.blue,
-                  child: const Icon(Icons.play_arrow_outlined),
-                  onPressed: () {
-                    audioPlayer.play(
+                FloatingActionButton(
+                    backgroundColor: Colors.red,
+                    child: const Icon(Icons.stop),
+                    onPressed: () {
+                      audioPlayer.stop();
+                      setState(() {});
+                    }),
+                FloatingActionButton(
+                    backgroundColor: Colors.blue,
+                    child: const Icon(Icons.play_arrow_outlined),
+                    onPressed: () {
+                      audioPlayer.play(
                           Provider.of<MusicProvider>(context, listen: false)
                               .path,
                           isLocal:
@@ -65,33 +72,29 @@ class _HomePageState extends State<HomePage> {
                           total: total, progress: progress, buffered: progress);
                       setState(() {});
                     }),
-              FloatingActionButton(
-                  backgroundColor: Colors.red,
-                  child: const Icon(Icons.stop),
-                  onPressed: () {
-                    audioPlayer.stop();
-                    setState(() {});
-                  }),
-              FloatingActionButton(
-                  backgroundColor: Colors.green,
-                  child: const Icon(Icons.pause),
-                  onPressed: () {
-                    audioPlayer.pause();
-                    setState(() {});
-                  }),
-            ],
+                FloatingActionButton(
+                    backgroundColor: Colors.green,
+                    child: const Icon(Icons.pause),
+                    onPressed: () {
+                      audioPlayer.pause();
+                      setState(() {});
+                    }),
+              ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ProgressBar(
-                progress: progress,
-                barHeight: 5,
-                total: total,
-                onSeek: (duration) {
-                  setState(() {});
-                  audioPlayer.seek(duration);
-                }
-            ),
+                  baseBarColor: const Color.fromRGBO(169, 134, 243, 1.0),
+                  progressBarColor: Colors.deepPurple,
+                  timeLabelTextStyle: const TextStyle(color: Colors.white),
+                  thumbColor: Colors.deepPurple,
+                  progress: progress,
+                  barHeight: 5,
+                  total: total,
+                  onSeek: (duration) {
+                    setState(() {});
+                    audioPlayer.seek(duration);
+                  }),
           )],
       )
     );

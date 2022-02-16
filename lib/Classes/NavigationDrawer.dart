@@ -57,7 +57,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
               const Text(
                 'User name',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -90,7 +90,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 const HomePage()));
                       },
