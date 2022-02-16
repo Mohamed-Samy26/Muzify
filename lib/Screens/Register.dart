@@ -5,31 +5,34 @@ import '../Classes/Constants.dart';
 import '../Classes/LocalDatabase.dart';
 import 'HomePage.dart';
 
-class loginScreen extends StatefulWidget {
-  loginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _loginScreenState extends State<loginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
+
+  final passwordConfirmationController = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is removed from the
     // widget tree.
-
     emailController.dispose();
     passwordController.dispose();
+    passwordConfirmationController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    bool _isTaken = false;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -45,22 +48,22 @@ class _loginScreenState extends State<loginScreen> {
                   height: size.height * 0.42,
                   child: Image.asset('assets/muzify.png'),
                 ),
-                 TextField(
-                 controller: emailController,
-                autofocus: true,
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  prefixIcon:
+                TextField(
+                  controller: emailController,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    prefixIcon:
                     Icon(Icons.person, size: 30, color: Colors.deepPurple),
-                  hintText: ('User name'),
-                  hintStyle: TextStyle(color: Colors.grey),
+                    hintText: ('User name'),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 SizedBox(
                   height: size.height * 0.08,
                 ),
-                 TextField(
-                 controller: passwordController,
+                TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     prefixIcon: Icon(Icons.lock_open,
@@ -73,6 +76,18 @@ class _loginScreenState extends State<loginScreen> {
                 SizedBox(
                   height: size.height * 0.06,
                 ),
+                TextField(
+                  controller: passwordConfirmationController,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.lock_open,
+                        size: 30, color: Colors.deepPurple),
+                    hintText: ('Confirm'),
+                    hintStyle: TextStyle(color: Colors.grey),
+                  ),
+                  obscureText: true,
+                ),
+
                 ClipRRect(
                   borderRadius: BorderRadius.circular(29),
                   child: FlatButton(
@@ -80,49 +95,50 @@ class _loginScreenState extends State<loginScreen> {
                     color: kPrimaryColor,
                     onPressed: () {
                       LocalDatabase.creatDatabase();
-                      LocalDatabase.getData(LocalDatabase.database);
-                    for(int i = 0 ; i < LocalDatabase.data.length;i++)
-                    {
-                      if(LocalDatabase.data[i].email == emailController.text)
-                      {
-                        if(LocalDatabase.data[i].password == passwordController.text)
-                        {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) {return HomePage();}));
+                      if(passwordController.text==passwordConfirmationController.text){
+                        LocalDatabase.getData(LocalDatabase.database);
+                        for(int i =0;i<LocalDatabase.data.length;i++){
+                          if(emailController.text==LocalDatabase.data[i].email){
+                            showDialog(context: context, builder: (context) =>AlertDialog(
+                              title: Text('Username is Taken'),
+                              content: Text('Try Another one'),
+                              actions: [
+                                TextButton(onPressed: (){
+                                  Navigator.of(context).pop();
+                                }, child: Text('Ok'))
+                              ],
+                            ));
+                            _isTaken = true;
                             break;
-                        }else
-                        {
-                          showDialog(context: context, builder: (context) =>AlertDialog(
-                            title: Text('Wrong password'),
-                            content: Text('Try Again'),
-                            actions: [
-                              TextButton(onPressed: (){
-                                Navigator.of(context).pop();
-                              }, child: Text('Ok'))
-                            ],
-                          ));
+                          }
+                          if(!_isTaken){
+                            LocalDatabase.insertDatabase(emailController.text, passwordController.text);
+                            showDialog(context: context, builder: (context) =>AlertDialog(
+                              title: Text('Signed in Successfuly'),
+                              content: Text('Enjoy Our App!!'),
+                              actions: [
+                                TextButton(onPressed: (){
+                                  Navigator.of(context).pop();
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) {return HomePage();}));
+                                }, child: Text('Ok'))
+                              ],
+                            ));
+                          }
                         }
-
-                      }
-                      else
-                      {
-                        print('2');
+                      }else{
                         showDialog(context: context, builder: (context) =>AlertDialog(
-                          title: Text('Invalid User'),
-                          content: Text('not a signed in user'),
+                          title: Text('Wrong Confirmation'),
+                          content: Text('Please make sure passwords match!'),
                           actions: [
                             TextButton(onPressed: (){
                               Navigator.of(context).pop();
                             }, child: Text('Ok'))
                           ],
                         ));
-
                       }
-
-
-                    }
                     },//on pressed
                     child: Text(
-                      "LOG IN",
+                      "Register",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -151,6 +167,4 @@ class _loginScreenState extends State<loginScreen> {
       ),
     );
   }
-
-
 }
