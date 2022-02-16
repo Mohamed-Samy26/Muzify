@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:m1/LocalDatabase.dart';
@@ -20,14 +21,15 @@ class _loginScreenState extends State<loginScreen> {
   void dispose() {
     // Clean up the controller when the widget is removed from the
     // widget tree.
+
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -77,22 +79,48 @@ class _loginScreenState extends State<loginScreen> {
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     color: kPrimaryColor,
                     onPressed: () {
-                      String enteredPassword = LocalDatabase.getPassword(emailController.text) as String;
-                      if(passwordController.text == enteredPassword){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return HomePage();
-                            }
-                        ),
-                      );
-                    }else{
-                        CupertinoAlertDialog(
-                          title: Text('Invalid credentials'),
-                        );
+                      LocalDatabase.creatDatabase();
+                      LocalDatabase.getData(LocalDatabase.database);
+                    for(int i = 0 ; i < LocalDatabase.data.length;i++)
+                    {
+                      if(LocalDatabase.data[i].email == emailController.text)
+                      {
+                        if(LocalDatabase.data[i].password == passwordController.text)
+                        {
+                            Navigator.push(context,MaterialPageRoute(builder: (context) {return HomePage();}));
+                            break;
+                        }else
+                        {
+                          showDialog(context: context, builder: (context) =>AlertDialog(
+                            title: Text('Wrong password'),
+                            content: Text('Try Again'),
+                            actions: [
+                              TextButton(onPressed: (){
+                                Navigator.of(context).pop();
+                              }, child: Text('Ok'))
+                            ],
+                          ));
+                        }
+
                       }
-                  },//on pressed
+                      else
+                      {
+                        print('2');
+                        showDialog(context: context, builder: (context) =>AlertDialog(
+                          title: Text('Invalid User'),
+                          content: Text('not a signed in user'),
+                          actions: [
+                            TextButton(onPressed: (){
+                              Navigator.of(context).pop();
+                            }, child: Text('Ok'))
+                          ],
+                        ));
+
+                      }
+
+
+                    }
+                    },//on pressed
                     child: Text(
                       "LOG IN",
                       style: TextStyle(
@@ -123,4 +151,6 @@ class _loginScreenState extends State<loginScreen> {
       ),
     );
   }
+
+
 }

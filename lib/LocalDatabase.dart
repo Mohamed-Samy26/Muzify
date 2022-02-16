@@ -1,98 +1,114 @@
-import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import './model.dart';
 import 'model.dart';
 
-/// table name UserInfo
-/// database path userInfo.db
+
 class LocalDatabase {
+
   static late Database database;
-  static List<UserData> userdata = [];
+  static List<Data> data =[];
+  // create Database
+  // create Table
+  // open Database
+  // insert into Database
+  // get from Database
+  // update
+  // delete
 
-  static Future<void> createDatabase() async {
-    database = await openDatabase('userInfo.db', version: 1,
-        onCreate: (database, version) {
-      print("Database is created");
-      // to create table in database
-      database
-          .execute(
-              'CREATE TABLE UserInfo(email text PRIMARY KEY ,password text)')
-          .then((value) {
-        print("table is created");
-      }).catchError((error) {
-        print(error.toString());
+  static Future<void> creatDatabase()async{
+
+    database = await openDatabase(
+        'test.db',
+        version: 1,
+
+        onCreate: (database, version){
+          print ("Database is created !!");
+          database.execute(
+              'CREATE TABLE Test (email text PRIMARY KEY, password text)'
+          ).
+          then((value) {
+            print('TABLE IS CREATED !!');
+            LocalDatabase.insertDatabase('admin', 'admin');
+          }).
+          catchError((error){
+            print(error.toString());
+          });
+        },
+
+        onOpen: (database){
+          print ('Database is open !!');
+          insertDatabase('admin', 'admin');
+          getData(database);
+
+
+        }
+
+    );
+
+
+  }
+
+  static void getData(Database database){
+    database.rawQuery(
+        'SELECT * FROM Test'
+    ).
+    then((value) {
+      value.forEach((element){
+        data.add(
+
+            Data(
+              email: element['email']as String ,
+              password: element['password']as String,
+              )
+        );
+
       });
-    },
 
-        //  open database
-        onOpen: (database) {
-      print("DataBase is opened");
-      getUserData(database);
-    });
-  }
-
-  static Future<String> getPassword(String email) async {
-    String requestedPassword='';
-      requestedPassword = database.query(
-          'SELCET password FROM UserInfo WHERE email = $email') as String;
-
-      return requestedPassword;
-
-  }
-  static Future<String> getEmail(String email) async {
-    String requestedEmail='';
-    requestedEmail = database.query(
-        'SELCET email FROM UserInfo WHERE email = $email') as String;
-
-    return requestedEmail;
-
-  }
-
-
-  static void getUserData(Database database) {
-    database.rawQuery('SELECT * FROM UserInfo').then((value) {
-      value.forEach((element) {
-        userdata.add(UserData(
-          /*id: element['id'] as int,*/
-          email: element['email'] as String,
-          password: element['password'] as String,
-        ));
-      });
-      /*print(userdata[0].id);*/
-      print(userdata[0].email);
-      print(userdata[0].password);
-    }).catchError((error) {
+    }).catchError((error){
       print(error.toString());
     });
   }
 
-  static Future<void> insertIntoDatabase(String email, String password) async {
-    database.rawInsert('INSERT INTO UserInfo (email, password) VALUES (?,?)',
-        [email, password]).then((value) {
-      print("Record $value is inserted");
-    }).catchError((error) {
-      print(error.toString());
+
+  static Future<void> insertDatabase(String email , String password)async{
+    database.rawInsert(
+        'INSERT INTO Test (email, password) VALUES ( ?,? )',[email,password]
+    ).
+    then((value) {
+      print("Record $value is inserted !!");
+    }).catchError((error){
+      print ( error.toString());
     });
   }
 
-  static void updateUserPassword(String email, String password /*, int id*/) {
-    database
-        .rawUpdate('update table UserInfo set  password =?  where email = ?', [
-      password,
-      email /*, id*/
-    ]).then((value) {
+  static void updateDatabase(String email, String password, int id){
+    database.rawUpdate(
+        'update table Test set email = ?, password =?  where id = ?',[email,password,id]
+    ).
+    then((value){
       print(value);
-    }).catchError((error) {
+    }).
+    catchError((error){
+      print(error.toString());
+    });
+
+
+  }
+
+  static void deleteDatabase(int id){
+    database.rawDelete(
+        'DELETE Test WHERE id = ?' ,[id]
+    ).then((value){
+      print(value);
+    }).catchError((error){
       print(error.toString());
     });
   }
 
-  static void deleteDatabase(String email) {
-    database
-        .rawDelete('DELETE UserInfo WHERE email = ?', [email]).then((value) {
-      print(value);
-    }).catchError((error) {
-      print(error.toString());
-    });
-  }
+}
+
+class Data {
+  final String email;
+  final String password;
+
+  Data({required this.email,required this.password});
 }

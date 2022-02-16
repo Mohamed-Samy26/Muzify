@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './login.dart';
 
 import '../colors.dart';
+import 'Register.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
@@ -59,7 +60,7 @@ class Body extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return loginScreen();
+                        return RegisterScreen();
                       },
                     ),
                   );
