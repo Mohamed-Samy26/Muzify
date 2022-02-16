@@ -47,32 +47,38 @@ class _loginScreenState extends State<loginScreen> {
                       height: size.height * 0.42,
                       child: Image.asset('assets/muzify.png'),
                     ),
-                    TextField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: emailController,
-                      autofocus: true,
-                      decoration: const InputDecoration(
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.person,
-                            size: 30, color: Colors.deepPurple),
-                        hintText: ('User name'),
-                        hintStyle: TextStyle(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: emailController,
+                        autofocus: true,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.person,
+                              size: 30, color: Colors.deepPurple),
+                          hintText: ('User name'),
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: size.height * 0.08,
                     ),
-                    TextField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: passwordController,
-                      decoration: const InputDecoration(
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.lock_open,
-                            size: 30, color: Colors.deepPurple),
-                        hintText: ('Password'),
-                        hintStyle: TextStyle(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: passwordController,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.lock_open,
+                              size: 30, color: Colors.deepPurple),
+                          hintText: ('Password'),
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
+                        obscureText: true,
                       ),
-                      obscureText: true,
                     ),
                     SizedBox(
                       height: size.height * 0.06,
@@ -81,7 +87,7 @@ class _loginScreenState extends State<loginScreen> {
                       borderRadius: BorderRadius.circular(29),
                       child: FlatButton(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 40),
+                            vertical: 15, horizontal: 100),
                         color: kPrimaryColor,
                         onPressed: () async {
                           LocalDatabase.creatDatabase();
@@ -94,41 +100,41 @@ class _loginScreenState extends State<loginScreen> {
                                 print('found');
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const HomePage();
-                                }));
+                                      return const HomePage();
+                                    }));
                                 break;
                               } else {
                                 print('not found');
                                 showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                          title: const Text('Wrong password'),
-                                          content: const Text('Try Again'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text('Ok'))
-                                          ],
-                                        ));
+                                      title: const Text('Wrong password'),
+                                      content: const Text('Try Again'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Ok'))
+                                      ],
+                                    ));
                               }
                             } else {
                               print('2');
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: const Text('Invalid User'),
-                                        content:
-                                            const Text('not a signed in user'),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text('Ok'))
-                                        ],
-                                      ));
+                                    title: const Text('Invalid User'),
+                                    content:
+                                    const Text('not a signed in user'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Ok'))
+                                    ],
+                                  ));
                             }
                           }
                         }, //on pressed
@@ -136,7 +142,7 @@ class _loginScreenState extends State<loginScreen> {
                           "LOG IN",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -149,8 +155,8 @@ class _loginScreenState extends State<loginScreen> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const HomePage();
-                        }));
+                              return const HomePage();
+                            }));
                       },
                     )
                   ],

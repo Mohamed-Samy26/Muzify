@@ -45,56 +45,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     SizedBox(
                       width: size.width * 0.7,
-                      height: size.height * 0.42,
+                      height: size.height * 0.32,
                       child: Image.asset('assets/muzify.png'),
                     ),
-                    TextField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: emailController,
-                      autofocus: true,
-                      decoration: const InputDecoration(
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.person,
-                            size: 30, color: Colors.deepPurple),
-                        hintText: ('User name'),
-                        hintStyle: TextStyle(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: emailController,
+                        autofocus: true,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.person,
+                              size: 30, color: Colors.deepPurple),
+                          hintText: ('User name'),
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: size.height * 0.08,
                     ),
-                    TextField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: passwordController,
-                      decoration: const InputDecoration(
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.lock_open,
-                            size: 30, color: Colors.deepPurple),
-                        hintText: ('Password'),
-                        hintStyle: TextStyle(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: passwordController,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.lock_open,
+                              size: 30, color: Colors.deepPurple),
+                          hintText: ('Password'),
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
+                        obscureText: true,
                       ),
-                      obscureText: true,
                     ),
                     SizedBox(
                       height: size.height * 0.06,
                     ),
-                    TextField(
-                      style: const TextStyle(color: Colors.white),
-                      controller: passwordConfirmationController,
-                      decoration: const InputDecoration(
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.lock_open,
-                            size: 30, color: Colors.deepPurple),
-                        hintText: ('Confirm'),
-                        hintStyle: TextStyle(color: Colors.grey),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: passwordConfirmationController,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.lock_open,
+                              size: 30, color: Colors.deepPurple),
+                          hintText: ('Confirm'),
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
+                        obscureText: true,
                       ),
-                      obscureText: true,
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(29),
                       child: FlatButton(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 40),
+                            vertical: 15, horizontal: 40),
                         color: kPrimaryColor,
                         onPressed: () {
                           LocalDatabase.creatDatabase();
@@ -102,25 +111,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               passwordConfirmationController.text) {
                             LocalDatabase.getData(LocalDatabase.database);
                             for (int i = 0;
-                                i < LocalDatabase.data.length;
-                                i++) {
+                            i < LocalDatabase.data.length;
+                            i++) {
                               if (emailController.text ==
                                   LocalDatabase.data[i].email) {
                                 showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                          title:
-                                              const Text('Username is Taken'),
-                                          content:
-                                              const Text('Try Another one'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text('Ok'))
-                                          ],
-                                        ));
+                                      title:
+                                      const Text('Username is Taken'),
+                                      content:
+                                      const Text('Try Another one'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Ok'))
+                                      ],
+                                    ));
                                 _isTaken = true;
                                 break;
                               }
@@ -131,47 +140,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                          title: const Text(
-                                              'Signed in Successfuly'),
-                                          content:
-                                              const Text('Enjoy Our App!!'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                  Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                    return const HomePage();
-                                                  }));
-                                                },
-                                                child: const Text('Ok'))
-                                          ],
-                                        ));
+                                      title: const Text(
+                                          'Signed in Successfuly'),
+                                      content:
+                                      const Text('Enjoy Our App!!'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                        return const HomePage();
+                                                      }));
+                                            },
+                                            child: const Text('Ok'))
+                                      ],
+                                    ));
                               }
                             }
                           } else {
                             showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                      title: const Text('Wrong Confirmation'),
-                                      content: const Text(
-                                          'Please make sure passwords match!'),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('Ok'))
-                                      ],
-                                    ));
+                                  title: const Text('Wrong Confirmation'),
+                                  content: const Text(
+                                      'Please make sure passwords match!'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Ok'))
+                                  ],
+                                ));
                           }
                         }, //on pressed
                         child: const Text(
                           "Register",
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                       ),

@@ -2,7 +2,6 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:m1/Classes/Constants.dart';
-import 'package:path/path.dart';
 import '../Classes/DurationState.dart';
 import '../Classes/NavigationDrawer.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +40,16 @@ class _HomePageState extends State<HomePage> {
             const Expanded(child: SizedBox()),
             SizedBox(
               width: 300,
-              child: Image.asset('assets/abc.jpg'),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(200),
+                child: Image.asset(
+                  'assets/abc.jpg',
+                  width: 200,
+                  height: 200,
+                ),
+
+              ),
+
             ),
             const Expanded(child: SizedBox()),
             Container(
@@ -74,10 +82,10 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             audioPlayer.play(
                                 Provider.of<MusicProvider>(context,
-                                        listen: false)
+                                    listen: false)
                                     .path,
                                 isLocal: Provider.of<MusicProvider>(context,
-                                        listen: false)
+                                    listen: false)
                                     .isLocal);
                             audioPlayer.onDurationChanged.listen((Duration d) {
                               print('Max duration: $d');
@@ -115,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                         baseBarColor: const Color.fromRGBO(169, 134, 243, 1.0),
                         progressBarColor: Colors.deepPurple,
                         timeLabelTextStyle:
-                            const TextStyle(color: Colors.white),
+                        const TextStyle(color: Colors.white),
                         thumbColor: Colors.deepPurple,
                         progress: progress,
                         barHeight: 5,
