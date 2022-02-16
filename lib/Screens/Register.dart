@@ -6,7 +6,7 @@ import '../Classes/LocalDatabase.dart';
 import 'HomePage.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Size size = MediaQuery.of(context).size;
     bool _isTaken = false;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: size.height,
         child: Stack(
@@ -49,22 +49,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Image.asset('assets/muzify.png'),
                 ),
                 TextField(
+                  style: const TextStyle(color: Colors.white),
                   controller: emailController,
                   autofocus: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     fillColor: Colors.white,
                     prefixIcon:
-                    Icon(Icons.person, size: 30, color: Colors.deepPurple),
+                        Icon(Icons.person, size: 30, color: Colors.deepPurple),
                     hintText: ('User name'),
-                    hintStyle: TextStyle(color: Colors.grey),
+                    hintStyle: const TextStyle(color: Colors.grey),
                   ),
                 ),
                 SizedBox(
                   height: size.height * 0.08,
                 ),
                 TextField(
+                  style: const TextStyle(color: Colors.white),
                   controller: passwordController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     fillColor: Colors.white,
                     prefixIcon: Icon(Icons.lock_open,
                         size: 30, color: Colors.deepPurple),
@@ -77,8 +79,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: size.height * 0.06,
                 ),
                 TextField(
+                  style: const TextStyle(color: Colors.white),
                   controller: passwordConfirmationController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     fillColor: Colors.white,
                     prefixIcon: Icon(Icons.lock_open,
                         size: 30, color: Colors.deepPurple),
@@ -87,57 +90,78 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   obscureText: true,
                 ),
-
                 ClipRRect(
                   borderRadius: BorderRadius.circular(29),
                   child: FlatButton(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 40),
                     color: kPrimaryColor,
                     onPressed: () {
                       LocalDatabase.creatDatabase();
-                      if(passwordController.text==passwordConfirmationController.text){
+                      if (passwordController.text ==
+                          passwordConfirmationController.text) {
                         LocalDatabase.getData(LocalDatabase.database);
-                        for(int i =0;i<LocalDatabase.data.length;i++){
-                          if(emailController.text==LocalDatabase.data[i].email){
-                            showDialog(context: context, builder: (context) =>AlertDialog(
-                              title: Text('Username is Taken'),
-                              content: Text('Try Another one'),
-                              actions: [
-                                TextButton(onPressed: (){
-                                  Navigator.of(context).pop();
-                                }, child: Text('Ok'))
-                              ],
-                            ));
+                        for (int i = 0; i < LocalDatabase.data.length; i++) {
+                          if (emailController.text ==
+                              LocalDatabase.data[i].email) {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: const Text('Username is Taken'),
+                                      content: const Text('Try Another one'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Ok'))
+                                      ],
+                                    ));
                             _isTaken = true;
                             break;
                           }
-                          if(!_isTaken){
-                            LocalDatabase.insertDatabase(emailController.text, passwordController.text);
-                            showDialog(context: context, builder: (context) =>AlertDialog(
-                              title: Text('Signed in Successfuly'),
-                              content: Text('Enjoy Our App!!'),
-                              actions: [
-                                TextButton(onPressed: (){
-                                  Navigator.of(context).pop();
-                                  Navigator.push(context,MaterialPageRoute(builder: (context) {return HomePage();}));
-                                }, child: Text('Ok'))
-                              ],
-                            ));
+                          if (!_isTaken) {
+                            LocalDatabase.insertDatabase(
+                                emailController.text, passwordController.text);
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title:
+                                          const Text('Signed in Successfuly'),
+                                      content: const Text('Enjoy Our App!!'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return const HomePage();
+                                              }));
+                                            },
+                                            child: const Text('Ok'))
+                                      ],
+                                    ));
                           }
                         }
-                      }else{
-                        showDialog(context: context, builder: (context) =>AlertDialog(
-                          title: Text('Wrong Confirmation'),
-                          content: Text('Please make sure passwords match!'),
-                          actions: [
-                            TextButton(onPressed: (){
-                              Navigator.of(context).pop();
-                            }, child: Text('Ok'))
-                          ],
-                        ));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Wrong Confirmation'),
+                                  content: const Text(
+                                      'Please make sure passwords match!'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Ok'))
+                                  ],
+                                ));
                       }
-                    },//on pressed
-                    child: Text(
+                    }, //on pressed
+                    child: const Text(
                       "Register",
                       style: TextStyle(
                           color: Colors.white,

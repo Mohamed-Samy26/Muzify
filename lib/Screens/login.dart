@@ -26,6 +26,7 @@ class _loginScreenState extends State<loginScreen> {
     passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,23 +46,25 @@ class _loginScreenState extends State<loginScreen> {
                   height: size.height * 0.42,
                   child: Image.asset('assets/muzify.png'),
                 ),
-                 TextField(
-                 controller: emailController,
-                autofocus: true,
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  prefixIcon:
-                    Icon(Icons.person, size: 30, color: Colors.deepPurple),
-                  hintText: ('User name'),
-                  hintStyle: TextStyle(color: Colors.grey),
+                TextField(
+                  style: const TextStyle(color: Colors.white),
+                  controller: emailController,
+                  autofocus: true,
+                  decoration: const InputDecoration(
+                    fillColor: Colors.white,
+                    prefixIcon:
+                        Icon(Icons.person, size: 30, color: Colors.deepPurple),
+                    hintText: ('User name'),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 SizedBox(
                   height: size.height * 0.08,
                 ),
-                 TextField(
-                 controller: passwordController,
-                  decoration: InputDecoration(
+                TextField(
+                  style: const TextStyle(color: Colors.white),
+                  controller: passwordController,
+                  decoration: const InputDecoration(
                     fillColor: Colors.white,
                     prefixIcon: Icon(Icons.lock_open,
                         size: 30, color: Colors.deepPurple),
@@ -76,52 +79,56 @@ class _loginScreenState extends State<loginScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(29),
                   child: FlatButton(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 40),
                     color: kPrimaryColor,
                     onPressed: () {
                       LocalDatabase.creatDatabase();
                       LocalDatabase.getData(LocalDatabase.database);
-                    for(int i = 0 ; i < LocalDatabase.data.length;i++)
-                    {
-                      if(LocalDatabase.data[i].email == emailController.text)
-                      {
-                        if(LocalDatabase.data[i].password == passwordController.text)
-                        {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) {return HomePage();}));
+                      for (int i = 0; i < LocalDatabase.data.length; i++) {
+                        if (LocalDatabase.data[i].email ==
+                            emailController.text) {
+                          if (LocalDatabase.data[i].password ==
+                              passwordController.text) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return HomePage();
+                            }));
                             break;
-                        }else
-                        {
-                          showDialog(context: context, builder: (context) =>AlertDialog(
-                            title: Text('Wrong password'),
-                            content: Text('Try Again'),
-                            actions: [
-                              TextButton(onPressed: (){
-                                Navigator.of(context).pop();
-                              }, child: Text('Ok'))
-                            ],
-                          ));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: Text('Wrong password'),
+                                      content: Text('Try Again'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Ok'))
+                                      ],
+                                    ));
+                          }
+                        } else {
+                          print('2');
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text('Invalid User'),
+                                    content: Text('not a signed in user'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('Ok'))
+                                    ],
+                                  ));
                         }
-
                       }
-                      else
-                      {
-                        print('2');
-                        showDialog(context: context, builder: (context) =>AlertDialog(
-                          title: Text('Invalid User'),
-                          content: Text('not a signed in user'),
-                          actions: [
-                            TextButton(onPressed: (){
-                              Navigator.of(context).pop();
-                            }, child: Text('Ok'))
-                          ],
-                        ));
-
-                      }
-
-
-                    }
-                    },//on pressed
-                    child: Text(
+                    }, //on pressed
+                    child: const Text(
                       "LOG IN",
                       style: TextStyle(
                           color: Colors.white,
@@ -151,6 +158,4 @@ class _loginScreenState extends State<loginScreen> {
       ),
     );
   }
-
-
 }
