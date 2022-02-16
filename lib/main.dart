@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:m1/Classes/Constants.dart';
 import 'package:m1/Classes/MusicProvider.dart';
-import 'package:m1/Screens/welcome.dart';
+import 'package:m1/Screens/Welcome.dart';
 import 'package:m1/main.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,8 @@ class Muzify extends StatelessWidget {
         child: MaterialApp(
           title: "Muzify",
           debugShowCheckedModeBanner: false,
-          home: welcome(),
+          //home: welcome(),
+          home: HomePage(),
           theme: ThemeData(
             appBarTheme: AppBarTheme(backgroundColor: KdarkPurble),
             scaffoldBackgroundColor: KdarkPurble,
