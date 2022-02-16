@@ -1,5 +1,4 @@
 import 'package:sqflite/sqflite.dart';
-import 'model.dart';
 
 
 class LocalDatabase {
