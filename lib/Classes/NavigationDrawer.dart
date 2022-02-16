@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import './Home.dart';
-import 'CreatePlaylist.dart';
+import '../main.dart';
+import 'Constants.dart';
+import '../Screens/CreatePlaylist.dart';
 import 'Hover.dart';
-import 'LikedSongs.dart';
-import './Search.dart';
-import 'YourLibrary.dart';
+import '../Screens/LikedSongs.dart';
+import '../Screens/Search.dart';
+import '../Screens/HomePage.dart';
+import '../Screens/YourLibrary.dart';
 
 class NavigationDrawer extends StatefulWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -14,11 +16,6 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  Color veryLightPurble = const Color(0xff202744);
-  Color lightPurble = const Color(0xff1b1c3a);
-  Color darkPurble = const  Color(0xff131126);
-  Color gray = const Color(0xff666583);
-  Color blue = const Color(0xff3bb5dc);
 
   @override
   Widget build(BuildContext context) {
@@ -26,52 +23,52 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       child: Container(
         //navigation bar
         width: 240,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [lightPurble, darkPurble]),
+              colors: [KlightPurble, KdarkPurble]),
         ),
         child: Padding(
           //padding for navigation bar
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: Column(
             //all elements in navigation bar
             crossAxisAlignment: CrossAxisAlignment.center,
             //make column in center in x-axis
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                     boxShadow: [
-                      BoxShadow(blurRadius: 10, color: blue, spreadRadius: 1)
+                      BoxShadow(blurRadius: 10, color: Kblue, spreadRadius: 1)
                     ]),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   //backgroundImage: Image.asset("assets/muzify.png"),
                   radius: 50,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Text(
+              const Text(
                 'User name',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   // shadows:
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -80,7 +77,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       size: 30,
                       color: color,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -93,19 +90,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const HomePage()));
                       },
                     ),
                   ],
                 );
               }),
 // -----------------------------------------------------------------------------
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Hover(
                 builder: (isHovered) {
-                  final color = isHovered ? blue : gray;
+                  final color = isHovered ? Kblue : Kgray;
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -114,7 +113,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         size: 30,
                         color: color,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       GestureDetector(
@@ -129,7 +128,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => Search()));
+                                  builder: (BuildContext context) =>
+                                      const Search()));
                         },
                       ),
                     ],
@@ -138,11 +138,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
 
 // -----------------------------------------------------------------------------
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -151,7 +151,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       size: 30,
                       color: color,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -165,7 +165,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       ),
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (BuildContext context) => YourLibrary()));
+                            builder: (BuildContext context) =>
+                                const YourLibrary()));
                       },
                     ),
                   ],
@@ -177,7 +178,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 40,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -212,7 +213,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 height: 10,
               ),
               Hover(builder: (isHovered) {
-                final color = isHovered ? blue : gray;
+                final color = isHovered ? Kblue : Kgray;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
