@@ -27,7 +27,7 @@ class Muzify extends StatelessWidget {
           title: "Muzify",
           debugShowCheckedModeBanner: false,
           //home: welcome(),
-          home: HomePage(),
+          home: const welcome(),
           theme: ThemeData(
             appBarTheme: AppBarTheme(backgroundColor: KdarkPurble),
             scaffoldBackgroundColor: KdarkPurble,

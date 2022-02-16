@@ -24,23 +24,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavigationDrawer(),
+        drawer: const NavigationDrawer(),
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
           toolbarHeight: 70,
-          title: Image(
+          title: const Image(
             image: AssetImage('assets/muzify.png'),
             width: 150,
           ),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 300,
+            const Expanded(child: SizedBox()),
+            SizedBox(
+              width: 300,
+              child: Image.asset('assets/abc.jpg'),
             ),
+            const Expanded(child: SizedBox()),
             Container(
               color: KlightPurble,
               child: Column(
@@ -52,14 +55,26 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          child: Icon(
+                          child: const Icon(
+                            Icons.stop,
+                            size: 40,
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            audioPlayer.stop();
+                            setState(() {});
+                          },
+                        ),
+                        GestureDetector(
+                          child: const Icon(
                             Icons.play_arrow,
                             size: 40,
                             color: Colors.white,
                           ),
                           onTap: () {
                             audioPlayer.play(
-                                Provider.of<MusicProvider>(context, listen: false)
+                                Provider.of<MusicProvider>(context,
+                                        listen: false)
                                     .path,
                                 isLocal: Provider.of<MusicProvider>(context,
                                         listen: false)
@@ -81,18 +96,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                         GestureDetector(
-                          child: Icon(
-                            Icons.stop,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          onTap: () {
-                            audioPlayer.stop();
-                            setState(() {});
-                          },
-                        ),
-                        GestureDetector(
-                          child: Icon(
+                          child: const Icon(
                             Icons.pause,
                             size: 40,
                             color: Colors.white,
@@ -110,7 +114,8 @@ class _HomePageState extends State<HomePage> {
                     child: ProgressBar(
                         baseBarColor: const Color.fromRGBO(169, 134, 243, 1.0),
                         progressBarColor: Colors.deepPurple,
-                        timeLabelTextStyle: const TextStyle(color: Colors.white),
+                        timeLabelTextStyle:
+                            const TextStyle(color: Colors.white),
                         thumbColor: Colors.deepPurple,
                         progress: progress,
                         barHeight: 5,
@@ -118,14 +123,12 @@ class _HomePageState extends State<HomePage> {
                         onSeek: (duration) {
                           setState(() {});
                           audioPlayer.seek(duration);
-                        }
-                        ),
+                        }),
                   )
                 ],
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }
