@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../Classes/Constants.dart';
 import '../Classes/LocalDatabase.dart';
 import 'HomePage.dart';
@@ -57,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     prefixIcon:
                         Icon(Icons.person, size: 30, color: Colors.deepPurple),
                     hintText: ('User name'),
-                    hintStyle: const TextStyle(color: Colors.grey),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 SizedBox(
