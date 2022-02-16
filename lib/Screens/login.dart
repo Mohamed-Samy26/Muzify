@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../Classes/Constants.dart';
 import '../Classes/LocalDatabase.dart';
 import 'HomePage.dart';
@@ -85,7 +84,7 @@ class _loginScreenState extends State<loginScreen> {
                             vertical: 20, horizontal: 40),
                         color: kPrimaryColor,
                         onPressed: () async {
-                          await LocalDatabase.creatDatabase();
+                          LocalDatabase.creatDatabase();
                           LocalDatabase.getData(LocalDatabase.database);
                           for (int i = 0; i < LocalDatabase.data.length; i++) {
                             if (LocalDatabase.data[i].email ==
@@ -141,6 +140,18 @@ class _loginScreenState extends State<loginScreen> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
+                    ),
+                    TextButton(
+                      child: const Text(
+                        'Skip',
+                        style: TextStyle(color: Colors.white54),
+                      ),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const HomePage();
+                        }));
+                      },
                     )
                   ],
                 )
