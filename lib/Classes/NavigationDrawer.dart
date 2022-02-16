@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import 'Constants.dart';
 import '../Screens/CreatePlaylist.dart';
 import 'Hover.dart';
@@ -48,7 +47,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       BoxShadow(blurRadius: 10, color: Kblue, spreadRadius: 1)
                     ]),
                 child: const CircleAvatar(
-                  //backgroundImage: Image.asset("assets/muzify.png"),
+                  child: Icon(Icons.person, size: 55),
                   radius: 50,
                 ),
               ),

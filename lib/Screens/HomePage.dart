@@ -38,16 +38,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 300,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: SizedBox()),
+            SizedBox(
+              child: Image.asset('assets/abc.jpg'),
+              height: 300,
+              width: 300,
+            ),
+            Expanded(child: SizedBox()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
                 FloatingActionButton(
                     backgroundColor: Colors.red,
                     child: const Icon(Icons.stop),
