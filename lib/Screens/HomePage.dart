@@ -22,18 +22,23 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawer(),
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        toolbarHeight: 70,
-        title: Image(
-          image: AssetImage('assets/muzify.png'),
-          width: 150,
+        drawer: const NavigationDrawer(),
+        onDrawerChanged: (bool x) {
+          if (x) {
+            audioPlayer.pause();
+          }
+        },
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 0,
+          toolbarHeight: 70,
+          title: const Image(
+            image: AssetImage('assets/muzify.png'),
+            width: 150,
+          ),
         ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(

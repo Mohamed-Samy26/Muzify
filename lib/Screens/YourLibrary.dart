@@ -64,8 +64,10 @@ class _YourLibraryState extends State<YourLibrary> {
                   onPressed: () async {
                     songs = await audioQuery.getSongs();
                     songs.forEach((element) {
-                      print({'${element} \n'});
+                      print({'$element \n'});
                     });
+                    Provider.of<MusicProvider>(context, listen: false).songs =
+                        songs;
                     songsList.addAll(songs.map((element) => Card(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
