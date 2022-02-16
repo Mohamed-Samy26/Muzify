@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:m1/Screens/LoginScreen.dart';
-import '../main.dart';
 import 'Constants.dart';
 import '../Screens/CreatePlaylist.dart';
 import 'Hover.dart';
@@ -8,7 +6,6 @@ import '../Screens/LikedSongs.dart';
 import '../Screens/Search.dart';
 import '../Screens/HomePage.dart';
 import '../Screens/YourLibrary.dart';
-import '../Screens/Welcome.dart';
 
 class NavigationDrawer extends StatefulWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -50,7 +47,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       BoxShadow(blurRadius: 10, color: Kblue, spreadRadius: 1)
                     ]),
                 child: const CircleAvatar(
-                  //backgroundImage: Image.asset("assets/muzify.png"),
+                  child: Icon(Icons.person, size: 55),
                   radius: 50,
                 ),
               ),
@@ -59,7 +56,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
               const Text(
                 'User name',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -92,7 +89,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 const HomePage()));
                       },
@@ -251,5 +248,3 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     );
   }
 }
-
-

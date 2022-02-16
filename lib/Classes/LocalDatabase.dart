@@ -13,18 +13,13 @@ class LocalDatabase {
   // update
   // delete
 
-  static Future<void> creatDatabase()async{
-
-    database = await openDatabase(
-        'test.db',
-        version: 1,
-
-        onCreate: (database, version){
-          print ("Database is created !!");
-          database.execute(
-              'CREATE TABLE Test (email text PRIMARY KEY, password text)'
-          ).
-          then((value) {
+  static Future<void> creatDatabase() async {
+    database = await openDatabase('test.db', version: 1,
+        onCreate: (database, version) {
+      print("Database is created !!");
+      database
+          .execute('CREATE TABLE Test (email text PRIMARY KEY, password text)')
+          .then((value) {
             print('TABLE IS CREATED !!');
             LocalDatabase.insertDatabase('admin', 'admin');
           }).
@@ -37,8 +32,6 @@ class LocalDatabase {
           print ('Database is open !!');
           insertDatabase('admin', 'admin');
           getData(database);
-
-
         }
 
     );
@@ -51,17 +44,12 @@ class LocalDatabase {
         'SELECT * FROM Test'
     ).
     then((value) {
-      value.forEach((element){
-        data.add(
-
-            Data(
-              email: element['email']as String ,
-              password: element['password']as String,
-              )
-        );
-
-      });
-
+      for (var element in value) {
+        data.add(Data(
+          email: element['email'] as String,
+          password: element['password'] as String,
+        ));
+      }
     }).catchError((error){
       print(error.toString());
     });
