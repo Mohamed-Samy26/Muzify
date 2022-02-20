@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Classes/NavigationDrawer.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:provider/provider.dart';
+
 import '../Classes/MusicProvider.dart';
-import '../Classes/Constants.dart';
+import '../Classes/NavigationDrawer.dart';
 import 'HomePage.dart';
 
 void main() => runApp(const MaterialApp(

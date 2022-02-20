@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../Classes/body.dart';
-import '../Classes/NavigationDrawer.dart';
 
-class welcome extends StatelessWidget {
-  const welcome({Key? key}) : super(key: key);
+import '../Classes/body.dart';
+
+class Welcome extends StatelessWidget {
+  const Welcome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Body(),
     );
   }

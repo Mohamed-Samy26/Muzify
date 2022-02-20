@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../Screens/Register.dart';
 import '../Screens/login.dart';
 import 'Constants.dart';
@@ -16,7 +17,7 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Welcome to muzify",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -24,20 +25,21 @@ class Body extends StatelessWidget {
                 color: Colors.purple,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Image.asset("assets/muzify.png"),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
+              margin: const EdgeInsets.symmetric(vertical: 20),
               width: 250,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(29),
                 child: FlatButton(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                   color: kPrimaryColor,
                   onPressed: () {
                     Navigator.push(
@@ -49,7 +51,7 @@ class Body extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "LOG IN",
                     style: TextStyle(
                         color: Colors.white,
@@ -64,19 +66,20 @@ class Body extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(29),
                 child: FlatButton(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                   color: kPrimaryLightColor,
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return RegisterScreen();
+                          return const RegisterScreen();
                         },
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "REGISTER ",
                     style: TextStyle(
                         color: Colors.black,
