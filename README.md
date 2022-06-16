@@ -1,6 +1,6 @@
 # Muzify
 
-A Flutter project that aims to making a music player which is also capable of searching for music, Downloading them and playing them locally.
+A Flutter music player which is also capable of searching for music, Downloading them locally and playing them offline.
 
 ## Getting Started
 
