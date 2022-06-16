@@ -2,7 +2,7 @@
 
 A Flutter music player which is also capable of searching for music, Downloading them locally and playing them offline.
 
-## Getting Started
+<!-- ## Getting Started
 
 ### Welcome page
 -
@@ -13,3 +13,4 @@ A Flutter music player which is also capable of searching for music, Downloading
 -
 ### Local Search
 -
+ -->
